@@ -230,8 +230,7 @@ CommandCall(CONSCLIENT *pCL, char *args)
 	    ++found;
 	}
     }
-    if (config->redirect == FLAGTRUE ||
-	(config->redirect != FLAGTRUE && found == 0)) {
+    if (config->redirect == FLAGTRUE || found == 0) {
 	if ((pRC = FindRemoteConsole(args)) != NULL) {
 	    ambiguous = BuildTmpString(pRC->rserver);
 	    ambiguous = BuildTmpString(", ");
@@ -272,8 +271,7 @@ CommandCall(CONSCLIENT *pCL, char *args)
 	/* look for a remote server if redirect is enabled or if
 	 * redirect is not enabled and we haven't found a unique
 	 * console match */
-	if (config->redirect == FLAGTRUE ||
-	    (config->redirect != FLAGTRUE && found != 1)) {
+	if (config->redirect == FLAGTRUE || found != 1) {
 	    for (pRC = pRCList; NULL != pRC; pRC = pRC->pRCnext) {
 		foundOne = 0;
 		if (strncasecmp(args, pRC->rserver, strlen(args))
