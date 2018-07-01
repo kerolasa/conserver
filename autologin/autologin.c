@@ -405,6 +405,8 @@ Process(void)
     } else {
 	execl(PATH_SU, "su", "-", pcLogin, NULL);
     }
+    fprintf(stderr, "%s: execl: %s\n", progname, strerror(errno));
+    exit(1);
 }
 
 #ifndef HAVE_PUTENV
