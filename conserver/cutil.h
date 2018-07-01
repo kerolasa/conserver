@@ -168,7 +168,6 @@ extern void FileVWrite(CONSFILE *, FLAG, char *, va_list);
 extern void FilePrint(CONSFILE *, FLAG, char *, ...);
 extern int FileStat(CONSFILE *, struct stat *);
 extern int FileSeek(CONSFILE *, off_t, int);
-extern int FileSend(CONSFILE *, const void *, size_t, int);
 extern int FileFDNum(CONSFILE *);
 extern int FileFDOutNum(CONSFILE *);
 extern int FileUnopen(CONSFILE *);
@@ -214,7 +213,6 @@ extern char *MyVersion(void);
 extern unsigned int AtoU(char *);
 extern void StrCpy(char *, const char *, unsigned int);
 #if HAVE_OPENSSL
-extern SSL *FileGetSSL(CONSFILE *);
 extern void FileSetSSL(CONSFILE *, SSL *);
 extern int SSLVerifyCallback(int, X509_STORE_CTX *);
 extern int FileSSLAccept(CONSFILE *);

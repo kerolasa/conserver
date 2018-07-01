@@ -1215,13 +1215,6 @@ ProcessFlow(CONSENT *c, char *id)
 }
 
 void
-DefaultItemFlow(char *id)
-{
-    CONDDEBUG((1, "DefaultItemFlow(%s) [%s:%d]", id, file, line));
-    ProcessFlow(parserDefaultTemp, id);
-}
-
-void
 ProcessHost(CONSENT *c, char *id)
 {
     if (c->host != NULL) {
@@ -3649,13 +3642,6 @@ ConsoleItemExec(char *id)
 }
 
 void
-ConsoleItemFlow(char *id)
-{
-    CONDDEBUG((1, "ConsoleItemFlow(%s) [%s:%d]", id, file, line));
-    ProcessFlow(parserConsoleTemp, id);
-}
-
-void
 ConsoleItemHost(char *id)
 {
     CONDDEBUG((1, "ConsoleItemHost(%s) [%s:%d]", id, file, line));
@@ -4874,7 +4860,6 @@ ITEM keyDefault[] = {
     {"exec", DefaultItemExec},
     {"execrunas", DefaultItemExecrunas},
     {"execsubst", DefaultItemExecsubst},
-/*  {"flow", DefaultItemFlow}, */
     {"host", DefaultItemHost},
     {"idlestring", DefaultItemIdlestring},
     {"idletimeout", DefaultItemIdletimeout},
@@ -4923,7 +4908,6 @@ ITEM keyConsole[] = {
     {"exec", ConsoleItemExec},
     {"execrunas", ConsoleItemExecrunas},
     {"execsubst", ConsoleItemExecsubst},
-/*  {"flow", ConsoleItemFlow}, */
     {"host", ConsoleItemHost},
     {"idlestring", ConsoleItemIdlestring},
     {"idletimeout", ConsoleItemIdletimeout},

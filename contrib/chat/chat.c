@@ -205,7 +205,6 @@ SIGTYPE sigalrm __P((int signo));
 SIGTYPE sigint __P((int signo));
 SIGTYPE sigterm __P((int signo));
 SIGTYPE sighup __P((int signo));
-void unalarm __P((void));
 void init __P((void));
 void set_tty_parameters __P((void));
 void echo_stderr __P((int));
@@ -529,17 +528,6 @@ SIGTYPE sigalrm(int signo)
 
     if (verbose)
 	log_mesg("alarm");
-}
-
-void unalarm(void)
-{
-    int flags;
-
-    if ((flags = fcntl(0, F_GETFL, 0)) == -1)
-	fatal(2, "Can't get file mode flags on stdin: %m");
-
-    if (fcntl(0, F_SETFL, flags & ~O_NONBLOCK) == -1)
-	fatal(2, "Can't set file mode flags on stdin: %m");
 }
 
 SIGTYPE sigint(int signo)

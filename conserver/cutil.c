@@ -1689,13 +1689,6 @@ FileSawQuoteGoto(CONSFILE *cfp)
 }
 
 #if HAVE_OPENSSL
-/* Get the SSL instance */
-SSL *
-FileGetSSL(CONSFILE *cfp)
-{
-    return cfp->ssl;
-}
-
 /* Sets the SSL instance */
 void
 FileSetSSL(CONSFILE *cfp, SSL *ssl)
@@ -1757,51 +1750,6 @@ FileSSLAccept(CONSFILE *cfp)
     return 1;
 }
 #endif
-
-/* Unless otherwise stated, returns the same values as send(2) */
-int
-FileSend(CONSFILE *cfp, const void *msg, size_t len, int flags)
-{
-    int retval = 0;
-    int fdout;
-
-    if (cfp->ftype == simplePipe)
-	fdout = cfp->fdout;
-    else
-	fdout = cfp->fd;
-
-    if (cfp->errored == FLAGTRUE) {
-	FD_CLR(fdout, &winit);
-	return -1;
-    }
-
-    switch (cfp->ftype) {
-	case simpleFile:
-	    retval = send(fdout, msg, len, flags);
-	    break;
-	case simplePipe:
-	    retval = send(fdout, msg, len, flags);
-	    break;
-	case simpleSocket:
-	    retval = send(fdout, msg, len, flags);
-	    break;
-#if HAVE_OPENSSL
-	case SSLSocket:
-	    retval = send(fdout, msg, len, flags);
-	    break;
-#endif
-	default:
-	    retval = -1;
-	    break;
-    }
-
-    if (retval < 0) {
-	cfp->errored = FLAGTRUE;
-	FD_CLR(fdout, &winit);
-    }
-
-    return retval;
-}
 
 /* replace trailing space with '\000' in a string and return
  * a pointer to the start of the non-space part

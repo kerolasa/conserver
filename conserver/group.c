@@ -3134,6 +3134,7 @@ unsigned char CM[] = {
     0x8d, 0x9a, 0xd1, 0xd1, 0xd1, 0xff, 0xff
 };
 
+#if USE_EXTENDED_MESSAGES
 unsigned char *
 Challenge(void)
 {
@@ -3172,7 +3173,7 @@ Challenge(void)
     }
     return n[cnt];
 }
-
+#endif
 
 /* This routine is used to gather input from the
  * client and save it in the accmd string.

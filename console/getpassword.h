@@ -5,4 +5,3 @@
  */
 
 extern char *GetPassword(char *);
-extern void *ClearPassword(void);

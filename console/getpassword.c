@@ -119,18 +119,3 @@ GetPassword(char *prompt)
     else
 	return pass->string;
 }
-
-void
-ClearPassword(void)
-{
-    if (pass == NULL || pass->allocated == 0)
-	return;
-
-#if HAVE_MEMSET
-    memset((void *)(pass->string), '\000', pass->allocated);
-#else
-    bzero((char *)(pass->string), pass->allocated);
-#endif
-
-    BuildString(NULL, pass);
-}
