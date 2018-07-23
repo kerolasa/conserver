@@ -1584,32 +1584,9 @@ FileSeek(CONSFILE *cfp, off_t offset, int whence)
 int
 FileFDNum(CONSFILE *cfp)
 {
-    int retval = 0;
-
     if (cfp == NULL)
 	return -1;
-
-    switch (cfp->ftype) {
-	case simpleFile:
-	    retval = cfp->fd;
-	    break;
-	case simplePipe:
-	    retval = cfp->fd;
-	    break;
-	case simpleSocket:
-	    retval = cfp->fd;
-	    break;
-#if HAVE_OPENSSL
-	case SSLSocket:
-	    retval = cfp->fd;
-	    break;
-#endif
-	default:
-	    retval = cfp->fd;
-	    break;
-    }
-
-    return retval;
+    return cfp->fd;
 }
 
 /* Returns the file descriptor number of the underlying file */
