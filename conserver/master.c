@@ -678,7 +678,7 @@ void
 Master(void)
 {
     int cfd;
-    int msfd;
+    int msfd = -1;
     socklen_t so;
     fd_set rmask, wmask;
 #if USE_IPV6 || !USE_UNIX_DOMAIN_SOCKETS

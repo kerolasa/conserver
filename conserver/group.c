@@ -5314,14 +5314,14 @@ void
 Spawn(GRPENT *pGE, int msfd)
 {
     pid_t pid;
-    int sfd;
+    int sfd = -1;
 #if USE_IPV6 || !USE_UNIX_DOMAIN_SOCKETS
 # if USE_IPV6
     int error;
     struct addrinfo *rp, hints, *res;
     char host[NI_MAXHOST];
     char serv[NI_MAXSERV];
-    unsigned short bindBasePort;
+    unsigned short bindBasePort = 0;
 # else
     socklen_t so;
     struct sockaddr_in lstn_port;
