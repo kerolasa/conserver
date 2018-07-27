@@ -128,7 +128,7 @@ typedef long fd_set;
 # include <sys/ttold.h>
 #endif
 
-#if HAVE_TYPES_H
+#if HAVE_SYS_TYPES_H
 # include <sys/types.h>
 #endif
 

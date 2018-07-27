@@ -60,12 +60,31 @@ AC_HEADER_TIME
 AC_CHECK_HEADERS([ \
   bsd/unistd.h \
   bsm/audit.h \
+  crypt.h \
+  getopt.h \
   hpsecurity.h \
   libutil.h \
   prot.h \
   pty.h \
+  shadow.h \
+  stropts.h \
+  sys/audit.h \
+  sysexits.h \
+  sys/ioctl_compat.h \
   sys/ioctl.h \
   sys/proc.h \
+  sys/resource.h \
+  sys/select.h \
+  sys/sockio.h \
+  sys/time.h \
+  sys/ttold.h \
+  sys/types.h \
+  sys/uio.h \
+  sys/vlimit.h \
+  sys/wait.h \
+  ttyent.h \
+  unistd.h \
+  usersec.h \
   util.h \
 ])
 
