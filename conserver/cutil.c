@@ -41,7 +41,7 @@ int isMaster = 1;
 
 /* in the routines below (the init code) we can bomb if malloc fails	(ksb)
  */
-void
+__attribute__((__noreturn__)) void
 OutOfMem(void)
 {
     static char acNoMem[] = ": out of memory\n";
@@ -52,7 +52,7 @@ OutOfMem(void)
 }
 
 /* do a general cleanup and exit */
-void
+__attribute__((__noreturn__)) void
 Bye(int status)
 {
     DestroyDataStructures();

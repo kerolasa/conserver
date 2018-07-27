@@ -447,7 +447,7 @@ void do_file (char *chat_file)
 /*
  *	We got an error parsing the command line.
  */
-void usage(void)
+__attribute__((__noreturn__)) void usage(void)
 {
     fprintf(stderr, "\
 Usage: %s [-eEIsSvV] [-t timeout] [-r report-file]\n\
@@ -591,7 +591,7 @@ void break_sequence(void)
 #endif
 }
 
-void terminate(int status)
+__attribute__((__noreturn__)) void terminate(int status)
 {
     static int terminating = 0;
 
