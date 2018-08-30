@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+top_builddir=${top_builddir:-'.'}
 
 pid=0
 testnum=0
@@ -20,15 +22,15 @@ cleanup()
 
 dotest()
 {
-    testnum=`expr $testnum + 1`
-    $ECHO "executing test #$testnum...$EE"
+    testnum=$(( testnum + 1 ))
+    printf "executing test #%d..." $testnum
     if [ "$2" ]; then
 	eval "$2" > test.out 2>&1
     else
 	echo "$1" | \
-	    $top_builddir/console/console -n -C /dev/null -M 127.0.0.1 -p 7777 shell > test.out 2>&1
+	    "$top_builddir"/console/console -n -C /dev/null -M 127.0.0.1 -p 7777 shell > test.out 2>&1
     fi
-    if [ "$record" ]; then
+    if [ -v record ]; then
 	echo "recorded"
 	mv test.out results/test$testnum
     else
@@ -47,23 +49,17 @@ dotest()
     fi
 }
 
-[ ! -f $top_builddir/conserver/conserver -o ! -f $top_builddir/console/console ] && \
-    echo 'binaries do not exist - did you run make yet?' && exit 1
+if [ ! -x "$top_builddir"/conserver/conserver ] || [ ! -x "$top_builddir"/console/console ]; then
+    echo 'binaries do not exist - did you run make yet?'
+    exit 1
+fi
 
 trap cleanup 15
 
-if [ "`echo -n`" = "-n" ]; then
-    ECHO="echo"
-    EE="\c"
-else
-    ECHO="echo -n"
-    EE=""
-fi
-
-$ECHO "starting conserver...$EE"
+printf "starting conserver..."
 rm -f c.cf
 cp test1.cf c.cf
-$top_builddir/conserver/conserver -M 127.0.0.1 -p 7777 -v -C c.cf \
+"$top_builddir"/conserver/conserver -M 127.0.0.1 -p 7777 -v -C c.cf \
     -P test.passwd -m 32 > conserver.log 2>&1 &
 
 pid=$!
