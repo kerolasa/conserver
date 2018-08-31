@@ -546,7 +546,7 @@ Verbose(char *fmt, ...)
 }
 
 void
-SimpleSignal(int sig, RETSIGTYPE(*disp) (int))
+SimpleSignal(int sig, void *disp)
 {
 #if HAVE_SIGACTION
     struct sigaction sa;

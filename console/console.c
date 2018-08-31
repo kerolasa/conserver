@@ -831,8 +831,7 @@ static sig_atomic_t fSawReapVirt = 0;
 #if HAVE_SIGACTION
 static
 #endif
-  RETSIGTYPE
-FlagReapVirt(int sig)
+void FlagReapVirt(int sig)
 {
     fSawReapVirt = 1;
 #if !HAVE_SIGACTION
